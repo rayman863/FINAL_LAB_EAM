@@ -38,7 +38,7 @@ class AdminController extends Controller
     public function store(Request $request)
     {
         $user = new User();
-        $user->username = $request->
+        //$user->username = $request->
     }
 
     /**
