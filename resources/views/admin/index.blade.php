@@ -6,27 +6,29 @@ Home page
 @endsection
 
 @section('content1')
-<h2>user list</h2>
+<h2>User List</h2>
 <table border="1">
 	<tr>
-		<td>ID</td>
 		<td>Username</td>
 		<td>Password</td>
 		<td>Type</td>
-		<td>Account No</td>
+		<td>Employee Name</td>
+		<td>Company Name</td>
+		<td>Contact Number</td>
 		<td>Action</td>
 	</tr>
 
 @for($i=0; $i != count($users); $i++)
 	<tr>
-		<td>{{$users[$i]->userId}}</td>
 		<td>{{$users[$i]->username}}</td>
 		<td>{{$users[$i]->password}}</td>
-		<td>{{$users[$i]->accNo}}</td>
 		<td>{{$users[$i]->type}}</td>
+		<td>{{$users[$i]->employee_name}}</td>
+		<td>{{$users[$i]->company_name}}</td>
+		<td>{{$users[$i]->contact_number}}</td>
 		<td>
-			<a href="{{route('home.edit', [$users[$i]->userId])}}">Edit</a> |
-			<a href="{{route('home.delete', [$users[$i]->userId])}}">Delete</a>
+			<a href="{{route('admin.edit', [$users[$i]->username])}}">Edit</a> |
+			<a href="{{route('admin.delete', [$users[$i]->username])}}">Delete</a>
 		</td>
 	</tr>
 @endfor

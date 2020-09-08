@@ -15,7 +15,7 @@ class VerifyType
      */
     public function handle($request, Closure $next)
     {
-        if($request->session()->get('type') == "admin"){
+        if($request->session()->get('type') == "Admin"){
             return $next($request);
         }else{
             return redirect('/home');

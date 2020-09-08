@@ -39,7 +39,7 @@ class LoginController extends Controller
                         ->where('password', $request->password)
                         ->get();*/
         
-        $data = DB::table('user_table')
+        $data = DB::table('users')
                     ->where('username', $request->username)
                     ->where('password', $request->password)
                     ->get();
@@ -50,11 +50,11 @@ class LoginController extends Controller
     	if(count($data) > 0 ){
             $request->session()->put('username', $request->username);
             
-            if($data[0]->type == "admin"){
-                $request->session()->put('type', "admin");
+            if($data[0]->type == "Admin"){
+                $request->session()->put('type', "Admin");
             }
 
-    		return redirect()->route('home.index');
+    		return redirect()->route('admin.index');
     	}else{
             $request->session()->flash('msg', 'invalid username/password');
             return redirect()->route('login.index');

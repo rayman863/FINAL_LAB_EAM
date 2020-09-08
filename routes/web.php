@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,19 +12,51 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    echo "index page";
 });
 
-Route::get('/login', 'LoginController@index');
-Route::post('/login', 'LoginController@validation');
+Route::get('/welcome', function(){
+	return view('test');
+});
+
+Route::get('/login', 'LoginController@index')->name('login.index');
+Route::post('/login', ['uses'=>'LoginController@verify']);
+Route::get('/logout', ['as'=>'logout.index', 'uses'=>'logoutController@index']);
 
 
-Route::get('/home', 'HomeController@index');
-Route::get('/home/edit/{id}', 'HomeController@edit');
-Route::post('/home/edit/{id}', 'HomeController@update');
+/*Route::group(['middleware'=>'sess'], function(){
+	Route::get('/home', 'HomeController@index')->middleware('sess');
+	Route::get('/home/edit/{id}', 'HomeController@edit')->middleware('sess');
+	Route::post('/home/edit/{id}', 'HomeController@update')->middleware('sess');
+	Route::get('/home/delete/{id}', 'HomeController@delete')->middleware('sess');
+	Route::post('/home/delete/{id}', 'HomeController@destroy')->middleware('sess');
+});*/
 
-Route::get('/home/delete/{id}', 'HomeController@delete');
-Route::post('/home/delete/{id}', 'HomeController@destroy');
+Route::get('/admin/index', 'AdminController@index')->name('admin.index');
+Route::get('/admin/create', 'AdminController@create')->name('admin.create');
+Route::get('/admin/edit', 'AdminController@edit')->name('admin.edit');
+Route::get('/admin/delete', 'AdminController@destroy')->name('admin.delete');
 
-Route::get('/home/details/{id}', 'HomeController@details');
 
+// Route::middleware(['sess'])->group(function(){
+
+// 	Route::get('/xyz', 'HomeController@index')->name('home.index');
+
+// 	Route::group(['middleware'=>['type']], function(){
+// 		Route::get('/admin/create', 'HomeController@create')->name('home.create');
+// 		Route::post('/admin/create', 'HomeController@store');
+// 		Route::get('/admin/edit/{id}', 'HomeController@edit')->name('home.edit');
+// 		Route::post('/admin/edit/{id}', 'HomeController@update');
+// 		Route::get('/home/delete/{id}', 'HomeController@delete')->name('home.delete');
+// 		Route::post('/home/delete/{id}', 'HomeController@destroy');
+		
+// 		Route::resource('account', 'AccountController');
+// 	});
+	
+// });
+
+// Route::resource('products', 'ProductController');
+
+//Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');
